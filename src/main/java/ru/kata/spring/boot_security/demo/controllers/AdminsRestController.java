@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class AdminsRestController {
 
     private final RolesService rolesService;
@@ -27,18 +27,18 @@ public class AdminsRestController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("")
     public ResponseEntity<List<User>> showAdminPage() {
         return new ResponseEntity<>(usersService.findAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/admin")
+    @PostMapping("")
     public ResponseEntity<Void> createUser(@RequestBody User user) {
         usersService.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/admin/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Void> updateUser(@RequestBody User user, @PathVariable int id) {
         if (user.getPassword().equals("")) {
             user.setPassword(usersService.findOne(id).getPassword());
@@ -50,7 +50,7 @@ public class AdminsRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/admin/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         usersService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);

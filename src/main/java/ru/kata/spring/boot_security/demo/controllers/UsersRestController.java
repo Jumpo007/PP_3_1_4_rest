@@ -11,7 +11,7 @@ import java.security.Principal;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UsersRestController {
 
     private final UsersService usersService;
@@ -21,7 +21,7 @@ public class UsersRestController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("")
     public ResponseEntity<User> showUser(Principal principal) {
         return new ResponseEntity<>(usersService.findByLogin(principal.getName()), HttpStatus.OK);
     }
